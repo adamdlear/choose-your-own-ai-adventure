@@ -4,18 +4,25 @@
     let { selectedGenre }: { selectedGenre: string } = $props();
 </script>
 
-<a
-    href={`/play/${selectedGenre.toLowerCase().replaceAll(" ", "-")}`}
-    class="fade-in"
-    transition:fade={{ duration: 300 }}
->
-    Start Game
-</a>
+<div>
+    <a
+        href={`/play/${selectedGenre.toLowerCase().replaceAll(" ", "-")}`}
+        class="fade-in"
+        transition:fade={{ duration: 300 }}
+    >
+        Start Game
+    </a>
+</div>
 
 <style>
+    div {
+        display: flex;
+        justify-content: center;
+    }
+
     a {
         font-size: large;
-        padding: 0.5rem 1rem;
+        padding: 0.5rem 4rem;
         text-align: center;
         background-color: rgb(96 165 250); /* Adjust as needed */
         color: white;

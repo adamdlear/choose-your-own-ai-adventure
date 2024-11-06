@@ -30,7 +30,7 @@
     </div>    
 </section>
 
-<section class="">
+<section>
     {#if selectedGenre}
         <StartGame selectedGenre={selectedGenre} />
     {/if}
@@ -82,5 +82,4 @@
         justify-content: center;
         gap: 0.5rem;
     }
-
 </style>
