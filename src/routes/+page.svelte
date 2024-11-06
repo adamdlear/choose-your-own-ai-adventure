@@ -1,60 +1,86 @@
-<script lang="ts">
-	import Counter from './Counter.svelte';
-	import welcome from '$lib/images/svelte-welcome.webp';
-	import welcomeFallback from '$lib/images/svelte-welcome.png';
-	import "../app.css"
+<script module lang="ts">
+	import { selectRandomGenres } from './genres';
+    import StartGame from './StartGame.svelte';
+
+	let selectedGenre = $state('');
+
+	const genres = selectRandomGenres();
 </script>
 
-<svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
-</svelte:head>
+<section>
+    <h1>Choose your Own adventure</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, asperiores impedit incidunt tempore dignissimos perspiciatis nam aliquam, quasi praesentium eaque odit amet rerum possimus error consequuntur quidem voluptatem. Vitae, nesciunt.</p>
+</section>
 
 <section>
-	<h1>
-		<span class="welcome">
-			<picture>
-				<source srcset={welcome} type="image/webp" />
-				<img src={welcomeFallback} alt="Welcome" />
-			</picture>
-		</span>
+    <h2>Choose your genre</h2>
+    <div class="genres">
+        {#each genres as genre}
+            <button
+                class:selected={selectedGenre === genre.label}
+                style={`border-color: ${genre.color}`}
+                onclick={() => {
+                    selectedGenre = selectedGenre === genre.label ? '' : genre.label;
+                }}
+            >
+                <p>{genre.label}</p>
+                <p>{genre.emoji}</p>
+            </button>
+        {/each}
+    </div>    
+</section>
 
-		to your new<br />SvelteKit app
-	</h1>
-
-	<h2>
-		try editing <strong>src/routes/+page.svelte</strong>
-	</h2>
-
-	<Counter />
+<section class="">
+    {#if selectedGenre}
+        <StartGame selectedGenre={selectedGenre} />
+    {/if}
 </section>
 
 <style>
-	section {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		flex: 0.6;
-	}
+    :root {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+    }
 
-	h1 {
-		width: 100%;
-	}
+    section {
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        justify-items: center;
+        gap: 1rem;
+    }
 
-	.welcome {
-		display: block;
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
-	}
+    h1 {
+        font-size: xx-large
+    }
 
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
-	}
+    h2 {
+        text-align: center;
+        font-size: x-large;
+    }
+
+    button {
+        padding: 0.5rem 1rem;
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        border: solid;
+        border-width: 2px;
+        border-radius: 9999px;
+    }
+
+    button.selected {
+        background-color: rgb(96 165 250); /* Change to your preferred color */
+        color: white;
+        border: none;
+    }
+
+    section .genres {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
 </style>
