@@ -1,9 +1,9 @@
 <script lang="ts">
-	const { content }: { content: string } = $props();
+	const { story }: { story: string } = $props();
 </script>
 
 <section>
-	<p>{content}</p>
+	<p>{story}</p>
 </section>
 
 <style>

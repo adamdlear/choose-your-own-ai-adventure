@@ -1,29 +1,27 @@
 <script lang="ts">
 	import ContentSection from './ContentSection.svelte';
 	import ChoiceSection from './ChoiceSection.svelte';
-	import jsonContent from './text.json';
 	import backArrow from '$lib/icons/back-arrow.svg';
+	import type { PageData } from '../$types';
 
-	interface Params {
-		slug: string;
-	}
+	const { data }: { data: PageData } = $props();
 
-	const { data }: { data: Params } = $props();
-
-	const title = jsonContent.title;
-	const content = jsonContent.content;
-	const choices = jsonContent.choices;
+	const chapter = data.chapters[0];
+	const id = chapter.id;
+	const title = chapter.title;
+	const story = chapter.story;
+	const choices = chapter.choices;
 </script>
 
 <div class="container">
 	<div class="title-line">
 		<img src={backArrow} alt="back arrow" />
 		<h1>{title}</h1>
-		<div></div>
+		<div>{id}</div>
 	</div>
 	<section class="content-wrapper">
 		<div class="left">
-			<ContentSection {content} />
+			<ContentSection {story} />
 		</div>
 		<hr class="divider" />
 		<div class="right">

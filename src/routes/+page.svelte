@@ -1,5 +1,5 @@
 <script module lang="ts">
-	import { selectRandomGenres } from './genres';
+	import { selectRandomGenres } from '$lib/genres';
 	import StartGame from './StartGame.svelte';
 
 	let selectedGenre = $state('');
