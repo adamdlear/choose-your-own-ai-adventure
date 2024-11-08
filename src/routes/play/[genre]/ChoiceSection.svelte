@@ -1,11 +1,13 @@
 <script lang="ts">
-	const { choices }: { choices: string[] } = $props();
+	import type { Choice } from "$lib/types";
+
+	const { choices }: { choices: Choice[] } = $props();
 </script>
 
 <section>
 	<div>
 		{#each choices as choice}
-			<button>{choice}</button>
+			<button>{choice.text}</button>
 		{/each}
 	</div>
 </section>

@@ -5,10 +5,10 @@ export const load: PageServerLoad = async ({ params }) => {
 	console.log("fetching story...")
 
 	try {
-		const chapters = await getStory(params.genre);
-		return { chapters: chapters }
+		const response = await getStory(params.genre);
+		return { chapters: response?.chapters }
 	} catch (error) {
 		console.error(error);
-		return null;
+		return { chapters: null };
 	}
 };

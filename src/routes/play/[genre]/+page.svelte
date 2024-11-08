@@ -2,9 +2,9 @@
 	import ContentSection from './ContentSection.svelte';
 	import ChoiceSection from './ChoiceSection.svelte';
 	import backArrow from '$lib/icons/back-arrow.svg';
-	import type { PageData } from '../$types';
+	import type { Chapters } from '$lib/types';
 
-	const { data }: { data: PageData } = $props();
+	const { data }: { data: Chapters } = $props();
 
 	const chapter = data.chapters[0];
 	const id = chapter.id;

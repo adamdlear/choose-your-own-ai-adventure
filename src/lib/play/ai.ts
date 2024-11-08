@@ -2,18 +2,6 @@ import OpenAI from 'openai';
 import { zodResponseFormat } from 'openai/helpers/zod';
 import { z } from 'zod';
 
-// type Choice = {
-//     text: string;
-//     next: number;
-// }
-
-// type Chapters = {
-//     id: number;
-//     chapter: string;
-//     story: string;
-//     choices: Choice[];
-// }
-
 const ChoiceSchema = z.object({
 	text: z.string(),
 	next: z.number()
@@ -21,12 +9,15 @@ const ChoiceSchema = z.object({
 
 const ChapterSchema = z.object({
 	id: z.number(),
+	title: z.string(),
 	chapter: z.string(),
 	story: z.string(),
 	choices: z.array(ChoiceSchema)
 });
 
-const ChaptersSchema = z.array(ChapterSchema);
+const ChaptersSchema = z.object({
+	chapters: z.array(ChapterSchema)
+});
 
 const openai = new OpenAI();
 
@@ -34,7 +25,7 @@ const systemRole =
 	'You are a famous storyteller best known for designing choose your own adventure styles stories. You do this by putting the stories in JSON format';
 
 export async function getStory(genre: string) {
-	const completion = await openai.chat.completions.create({
+	const completion = await openai.beta.chat.completions.parse({
 		model: 'gpt-4o-mini',
 		messages: [
 			{ role: 'system', content: systemRole },
@@ -46,5 +37,5 @@ export async function getStory(genre: string) {
 		response_format: zodResponseFormat(ChaptersSchema, 'chapter_response')
 	});
 
-	return completion.choices[0].message;
+	return completion.choices[0].message.parsed;
 }
