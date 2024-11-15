@@ -2,17 +2,14 @@
 	import { selectRandomGenres } from '$lib/genres';
 	import StartGame from './StartGame.svelte';
 
+	let genres = $state(selectRandomGenres());
 	let selectedGenre = $state('');
-
-	const genres = selectRandomGenres();
 </script>
 
 <section>
-	<h1>Choose your Own adventure</h1>
+	<h1>Choose your own adventure</h1>
 	<p>
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, asperiores impedit incidunt
-		tempore dignissimos perspiciatis nam aliquam, quasi praesentium eaque odit amet rerum possimus
-		error consequuntur quidem voluptatem. Vitae, nesciunt.
+		Play an AI generated choose-your-own-adventure style game base on a selected story genre.
 	</p>
 </section>
 
@@ -32,6 +29,11 @@
 			</button>
 		{/each}
 	</div>
+	{#if !selectedGenre}
+		<div class="new-genres">
+			<button onclick={() => {genres = selectRandomGenres()}}>Generate New Genres</button>
+		</div>
+	{/if}
 </section>
 
 <section>
@@ -64,6 +66,10 @@
 		font-size: x-large;
 	}
 
+	p {
+		text-align: center;
+	}
+
 	button {
 		padding: 0.5rem 1rem;
 		display: flex;
@@ -75,7 +81,7 @@
 	}
 
 	button.selected {
-		background-color: rgb(96 165 250); /* Change to your preferred color */
+		background-color: var(--color-theme-2); /* Change to your preferred color */
 		color: white;
 		border: none;
 	}
@@ -85,5 +91,15 @@
 		flex-wrap: wrap;
 		justify-content: center;
 		gap: 0.5rem;
+	}
+
+	.new-genres {
+		display: flex;
+		justify-content: center;
+	}
+
+	.new-genres button {
+		color: white;
+		background-color: var(--color-theme-2);
 	}
 </style>

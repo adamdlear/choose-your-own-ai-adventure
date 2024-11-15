@@ -1,17 +1,10 @@
 <script lang="ts">
-	import logo from '$lib/images/svelte-logo.svg';
 	import github from '$lib/images/github.svg';
 </script>
 
 <header>
 	<div class="corner">
-		<a href="https://svelte.dev/docs/kit">
-			<img src={logo} alt="SvelteKit" />
-		</a>
-	</div>
-
-	<div class="corner">
-		<a href="https://github.com/sveltejs/kit">
+		<a href="https://github.com/adamdlear/choose-your-own-ai-adventure">
 			<img src={github} alt="GitHub" />
 		</a>
 	</div>
@@ -19,8 +12,7 @@
 
 <style>
 	header {
-		display: flex;
-		justify-content: space-between;
+		padding-top: 12px;
 	}
 
 	.corner {
