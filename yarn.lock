@@ -188,10 +188,10 @@
   dependencies:
     levn "^0.4.1"
 
-"@fontsource/fira-mono@^5.0.0":
+"@fontsource/geist-mono@^5.1.0":
   version "5.1.0"
-  resolved "https://registry.yarnpkg.com/@fontsource/fira-mono/-/fira-mono-5.1.0.tgz#2ac0c8f7bf917fbbcae6b1e80242315ab1e7e054"
-  integrity sha512-6+nftSKApXyN0I9FC5GJuG5TUCh+in5OehtrXRIsHJvq38Pm//oA1kZZYNdXv99JYzLzJ3lzsTAavmS+xGLGDw==
+  resolved "https://registry.yarnpkg.com/@fontsource/geist-mono/-/geist-mono-5.1.0.tgz#a46a0abed1b594e7ae1f55a53a1fa17255ca5186"
+  integrity sha512-MDFgmKUdDbV357vD2bOZAro597Nd2md01GAdr3GSZteCJQdPT/UhHUBCAxl9KUiH03aMPFM9Rx7x8/EtrJmpKg==
 
 "@humanfs/core@^0.19.1":
   version "0.19.1"
