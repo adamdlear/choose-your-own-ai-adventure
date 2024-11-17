@@ -16,7 +16,7 @@
 	const fetchChapter = async () => {
 		const response = await fetch(`/play/${genre}`, {
 			method: 'POST',
-			body: JSON.stringify({ chapters }),
+			body: JSON.stringify({ genre, chapters }),
 			headers: {
 				'Content-Type': 'application/json'
 			}
@@ -26,7 +26,7 @@
 		chapter = data.chapter as Chapter;
 
 		chapters.push(chapter);
-	}
+	};
 
 	onMount(() => {
 		fetchChapter();
