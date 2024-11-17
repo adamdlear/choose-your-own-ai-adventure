@@ -1,23 +1,16 @@
+import { getChapter } from '$lib/play/ai';
 import { json } from '@sveltejs/kit';
-import type { Chapter } from '$lib/types';
 import type { RequestHandler } from './$types';
 
 export const POST: RequestHandler = async ({ request }) => {
-    const { chapters } = await request.json();
+    const { genre, chapters } = await request.json();
+
+    try {
+        const chapter = await getChapter(genre, chapters);
+        return json({ chapter }, { status: 200 });
+    } catch (error) {
+        console.error("error fetching chapter:", error)
+        return json({ chapter: null }, { status: 500 })
+    }
     
-    console.log(chapters);
-
-	const chapter: Chapter = {
-		chapterNumber: 1,
-		title: 'Some Title',
-		story: 'my story content',
-        choices: [
-            "choice1",
-            "choice2",
-            "choice3",
-            "choice4",
-        ]
-	};
-
-	return json({ chapter });
 };
