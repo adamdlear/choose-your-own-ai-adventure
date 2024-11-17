@@ -8,9 +8,7 @@
 
 <section>
 	<h1>Choose your own adventure</h1>
-	<p>
-		Play an AI generated choose-your-own-adventure style game base on a selected story genre.
-	</p>
+	<p>Play an AI generated choose-your-own-adventure style game base on a selected story genre.</p>
 </section>
 
 <section>
@@ -31,7 +29,11 @@
 	</div>
 	{#if !selectedGenre}
 		<div class="new-genres">
-			<button onclick={() => {genres = selectRandomGenres()}}>Generate New Genres</button>
+			<button
+				onclick={() => {
+					genres = selectRandomGenres();
+				}}>Generate New Genres</button
+			>
 		</div>
 	{/if}
 </section>

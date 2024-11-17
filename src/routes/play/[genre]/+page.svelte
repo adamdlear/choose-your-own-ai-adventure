@@ -1,47 +1,78 @@
 <script lang="ts">
-	import ContentSection from './ContentSection.svelte';
-	import ChoiceSection from './ChoiceSection.svelte';
+	import { goto } from '$app/navigation';
 	import backArrow from '$lib/icons/back-arrow.svg';
-	import type { Chapters } from '$lib/types';
+	import type { Chapter } from '$lib/types';
+	import { onMount } from 'svelte';
+	import ChoiceSection from './ChoiceSection.svelte';
+	import ContentSection from './ContentSection.svelte';
 
-	const { data }: { data: Chapters } = $props();
+	const { data } = $props();
 
-	const chapter = data.chapters[0];
-	const id = chapter.id;
-	const title = chapter.title;
-	const story = chapter.story;
-	const choices = chapter.choices;
+	const genre = data.genre;
+	let chapterNumber: number = $state(1);
+	let chapter: Chapter | undefined = $state();
+	const chapters: Chapter[] = $state([]);
+
+	const fetchChapter = async () => {
+		const response = await fetch(`/play/${genre}`, {
+			method: 'POST',
+			body: JSON.stringify({ chapters }),
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		});
+
+		const data = await response.json();
+		chapter = data.chapter as Chapter;
+
+		chapters.push(chapter);
+	}
+
+	onMount(() => {
+		fetchChapter();
+	});
+
+	const onGoBack = () => {
+		goto('/');
+	};
+
+	const onChoiceSelect = async () => {
+		chapterNumber += 1;
+
+		await fetchChapter();
+	};
 </script>
 
-<div class="container">
-	<div class="title-line">
-		<img src={backArrow} alt="back arrow" />
-		<h1>{title}</h1>
-		<div>{id}</div>
+{#if chapter}
+	<div class="container">
+		<div class="title-line">
+			<button onclick={onGoBack}>
+				<img src={backArrow} alt="back arrow" />
+			</button>
+			<h1>{chapter.title}</h1>
+			<div>{chapters.length}</div>
+		</div>
+		<section class="content-wrapper">
+			<div class="left">
+				<ContentSection story={chapter.story} />
+			</div>
+			<hr class="divider" />
+			<div class="right">
+				<ChoiceSection choices={chapter.choices} {onChoiceSelect} />
+			</div>
+		</section>
 	</div>
-	<section class="content-wrapper">
-		<div class="left">
-			<ContentSection {story} />
-		</div>
-		<hr class="divider" />
-		<div class="right">
-			<ChoiceSection {choices} />
-		</div>
-	</section>
-</div>
+{/if}
 
 <style>
-	/* Basic reset */
 	* {
 		margin: 0;
 		padding: 0;
 		box-sizing: border-box;
 	}
 
-	/* Main container styling */
 	.container {
 		padding: 1rem;
-		font-family: Arial, sans-serif;
 		min-height: 100%;
 		display: flex;
 		flex-direction: column;
@@ -54,13 +85,11 @@
 		align-items: center;
 	}
 
-	/* Header styling */
 	h1 {
 		font-size: 2rem;
 		text-align: center;
 	}
 
-	/* Section layout */
 	.content-wrapper {
 		display: flex;
 		flex: 1;

@@ -1,15 +1,6 @@
-export type Choice = {
-	text: string;
-	next: number;
-};
-
-export type Chapter = {
-	id: number;
+export interface Chapter {
+	chapterNumber: number;
 	title: string;
 	story: string;
-	choices: Choice[];
-};
-
-export type Chapters = {
-	chapters: Chapter[];
-};
+	choices: string[];
+}

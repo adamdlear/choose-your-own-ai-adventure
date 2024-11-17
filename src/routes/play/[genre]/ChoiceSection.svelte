@@ -1,13 +1,16 @@
 <script lang="ts">
-	import type { Choice } from '$lib/types';
+	interface ChoiceSelectionProps {
+		choices: string[];
+		onChoiceSelect: () => void;
+	}
 
-	const { choices }: { choices: Choice[] } = $props();
+	const { choices, onChoiceSelect }: ChoiceSelectionProps = $props();
 </script>
 
 <section>
 	<div>
 		{#each choices as choice}
-			<button>{choice.text}</button>
+			<button onclick={onChoiceSelect}>{choice}</button>
 		{/each}
 	</div>
 </section>
