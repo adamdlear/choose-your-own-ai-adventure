@@ -9,6 +9,8 @@
 	const { data } = $props();
 
 	const genre = data.genre;
+	const storyLength = data.storyLength;
+
 	let chapterNumber: number = $state(1);
 	let chapter: Chapter | undefined = $state();
 	const chapters: Chapter[] = $state([]);
@@ -16,7 +18,7 @@
 	const fetchChapter = async () => {
 		const response = await fetch(`/play/${genre}`, {
 			method: 'POST',
-			body: JSON.stringify({ genre, chapters }),
+			body: JSON.stringify({ genre, storyLength, chapters }),
 			headers: {
 				'Content-Type': 'application/json'
 			}

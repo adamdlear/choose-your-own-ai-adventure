@@ -1,5 +1,7 @@
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ params }) => {
-	return { genre: params.genre };
+	const storyLength = Math.floor(3 + Math.random() * (5 - 3 + 1));
+
+	return { genre: params.genre, storyLength };
 };
