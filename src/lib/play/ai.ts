@@ -15,7 +15,6 @@ const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
 
 export const getChapter = async (genre: string, storyLength: number, chapters: Chapter[]) => {
 	const chapterNumber = chapters.length + 1;
-	
 
 	const completion = await openai.beta.chat.completions.parse({
 		model: 'gpt-4o-mini',
@@ -29,7 +28,7 @@ export const getChapter = async (genre: string, storyLength: number, chapters: C
 			{
 				role: 'user',
 				content: `This is what has happened so far in the story: ${chapters}.`
-						+ `Generate chapter ${chapterNumber}.`
+						+ `Generate chapter ${chapterNumber} in 150 words or less and provide 4 potential choices for the user to make.`
 						+ `If this should be the last chapter, conclude the story and do not provide any choices.`
 			}
 		],
@@ -44,7 +43,7 @@ export const getChapter = async (genre: string, storyLength: number, chapters: C
 // 	const chapter = {
 // 		chapterNumber: 1,
 // 		title: `Some Title about ${genre}`,
-// 		story: 'my story content',
+// 		story: "Lorem ipsum odor amet, consectetuer adipiscing elit. Tortor penatibus id donec aenean vitae interdum. Bibendum eleifend euismod viverra felis interdum, sit phasellus elit. Suscipit varius elit habitasse pharetra fermentum ullamcorper nec feugiat nulla. Etiam parturient imperdiet felis commodo morbi vestibulum semper lacinia. Dis venenatis adipiscing aptent magna placerat elit consectetur orci sociosqu. Lectus curabitur netus ullamcorper curabitur ultrices aenean sapien. Mi ultricies ligula cubilia donec penatibus. Venenatis natoque sodales inceptos dictum, quis vitae euismod. Vel in nam diam sollicitudin consectetur metus feugiat. Nisl litora vehicula varius nullam habitasse metus volutpat. Dignissim vitae purus eget fusce maximus hendrerit risus libero. Habitant integer varius primis amet suscipit pulvinar; risus nullam. Eleifend nam quisque vivamus; morbi lacinia luctus. Fames scelerisque taciti venenatis, nisi leo turpis nullam aliquet ut. Enim leo dis, non consectetur tempus nibh quisque. Augue pretium habitant maximus purus, integer laoreet tempus.",
 // 		choices: [
 // 			"choice1",
 // 			"choice2",

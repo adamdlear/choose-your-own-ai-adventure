@@ -16,17 +16,29 @@
 </section>
 
 <style>
+	section {
+		width: 100%;
+	}
+
 	div {
 		display: flex;
+		flex: 1;
 		flex-direction: column;
 		align-items: center;
 		gap: 1rem;
 	}
 
 	button {
-		padding: 0.5rem;
-		width: 75%;
+		width: 100%;
+		padding: 0.75rem;
 		border: solid;
 		border-radius: 9999px;
+		color: var(--color-theme-3);
+		background-color: var(--color-theme-2);
+	}
+
+	button:active {
+		color: var(--color-theme-3);
+		background-color: var(--color-theme-1);
 	}
 </style>

@@ -60,7 +60,11 @@
 			</div>
 			<hr class="divider" />
 			<div class="right">
-				<ChoiceSection choices={chapter.choices} {onChoiceSelect} />
+				{#if chapter.choices.length > 0}
+					<ChoiceSection choices={chapter.choices} {onChoiceSelect} />
+				{:else}
+					<a href="/">Play Again</a>	
+				{/if}
 			</div>
 		</section>
 	</div>
@@ -106,11 +110,21 @@
 		min-width: 290px;
 		display: flex;
 		flex-direction: column;
-		justify-content: space;
+		align-items: center;
+		justify-content: center;
 	}
 
 	.divider {
 		display: none;
+	}
+
+	a {
+		text-align: center;
+		padding: 0.5rem;
+		width: 100%;
+		border-radius: 9999px;
+		color: var(--color-theme-3);
+		background-color: var(--color-theme-1);
 	}
 
 	@media (max-width: 768px) {
