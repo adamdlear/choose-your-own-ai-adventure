@@ -51,5 +51,8 @@ export const getChapter = async (genre: string, storyLength: number, chapters: C
 // 			"choice4",
 // 		]
 // 	};
+
+// 	setTimeout(() => (console.log("waiting...")), 3000);
+
 // 	return chapter;
 // };

@@ -5,6 +5,7 @@
 	import { onMount } from 'svelte';
 	import ChoiceSection from './ChoiceSection.svelte';
 	import ContentSection from './ContentSection.svelte';
+	import Loading from './Loading.svelte';
 
 	const { data } = $props();
 
@@ -39,6 +40,8 @@
 	};
 
 	const onChoiceSelect = async () => {
+		chapter = undefined;		
+
 		chapterNumber += 1;
 
 		await fetchChapter();
@@ -68,6 +71,8 @@
 			</div>
 		</section>
 	</div>
+{:else}
+	<Loading />
 {/if}
 
 <style>
