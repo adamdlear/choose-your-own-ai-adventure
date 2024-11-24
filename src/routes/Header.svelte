@@ -1,8 +1,14 @@
 <script lang="ts">
 	import github from '$lib/images/github.svg';
+	import home from '$lib/icons/home.svg'
 </script>
 
 <header>
+	<div class="corner">
+		<a href="/">
+			<img src={home} alt="Home" />
+		</a>
+	</div>
 	<div class="corner">
 		<a href="https://github.com/adamdlear/choose-your-own-ai-adventure">
 			<img src={github} alt="GitHub" />
@@ -13,6 +19,8 @@
 <style>
 	header {
 		padding-top: 12px;
+		display: flex;
+		justify-content: space-between;
 	}
 
 	.corner {
