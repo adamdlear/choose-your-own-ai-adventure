@@ -40,7 +40,7 @@
 	};
 
 	const onChoiceSelect = async () => {
-		chapter = undefined;		
+		chapter = undefined;
 
 		chapterNumber += 1;
 
@@ -66,7 +66,7 @@
 				{#if chapter.choices.length > 0}
 					<ChoiceSection choices={chapter.choices} {onChoiceSelect} />
 				{:else}
-					<a href="/">Play Again</a>	
+					<a href="/">Play Again</a>
 				{/if}
 			</div>
 		</section>
