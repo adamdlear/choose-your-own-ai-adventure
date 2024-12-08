@@ -10,10 +10,10 @@ to LLMs.
 
 ## Getting Started Locally
 
-Create a file for environment variables
+Create your `.env` file and add your OpenAI API key
 
-```bash
-touch .env
+```.env
+OPENAI_API_KEY=
 ```
 
 Install the necessary dependencies
